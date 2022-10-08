@@ -1,0 +1,66 @@
+				ASSIGNMENT-1
+
+
+OBJECTIVE:
+		Make a smart home in Tinkercad using 2+ sensors,LED, Buzzerin single code and circuit.
+
+SUMMARY:
+		This project uses two sensors:
+
+              1.TEMPERATURE sensor: To detect the temperature and turn on the buzzer and light if it exceeds 60 degree Celsius(FIRE ALARM).
+
+		   2.PIR sensor: To detect motion using pir sensor and turn on the light if motion exists. 
+
+
+CODE:
+
+// C++ code
+
+
+void setup()
+{
+    Serial.begin(9600);
+
+   pinMode(7, OUTPUT);
+   pinMode(2, OUTPUT);
+   pinMode(6, OUTPUT);
+   pinMode(A0,INPUT);
+   pinMode(3,INPUT);
+
+}
+
+void loop()
+{
+   float celsius = map(((analogRead(A0) - 20) * 3.04), 0, 1023, -40, 125);//TEMPERATURE SENSOR(FIRE DETECTION)
+
+    Serial.print(celsius);
+    Serial.println(" C");
+
+  if (celsius>=60)
+  {
+    Serial.println("*******TURNING ON THE FIRE ALARM AND LIGHT*******");
+    digitalWrite(2,HIGH);
+    tone(7, 220, 100);
+  }
+   delay(200);
+   int pir = digitalRead(3); //PIR SENSOR(MOTION DETECTOR)
+  if(pir == HIGH)
+  {   
+    Serial.println("*******TURNING ON THE LIGHTS*******");
+    digitalWrite(6,HIGH);
+    delay(1000);
+  }
+  else if(pir == LOW)
+  {
+   Serial.println("*******TURNING OFF THE LIGHTS*******");
+   digitalWrite(6,LOW);
+  }
+}
+
+
+
+
+SIMULATION LINK:
+
+
+	https://www.tinkercad.com/things/7h3rHVjLryP-smarthome/editel?sharecode=RS96h4QxU-2cj8J19B4g8VSW3omR_pk8uSzrNQ41un8
